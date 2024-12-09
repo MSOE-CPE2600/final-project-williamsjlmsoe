@@ -1,11 +1,11 @@
-/*************************************
+/******************************************************************************
  *  Filename: voting_client.c
- *  Description: 
+ *  Description: A client programthat connects to the voting machine, 
+ *               enabling users to cast their votes and log voting results.
  *  Authors: Connor Albrecht and John Williams
  *  Date: 12/8/24
  *  Note: gcc -o voting_client voting_client.c
- *************************************/
-
+ *****************************************************************************/
 
 
 #include <stdio.h>
