@@ -1,0 +1,18 @@
+# Ignore compiled binaries
+voting_machine
+voting_client
+
+# Ignore object files
+*.o
+
+# Ignore editor-specific files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ignore build artifacts
+build/
+
+# Ignore logs
+*.log
