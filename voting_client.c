@@ -23,6 +23,7 @@ int main() {
     char buffer[BUFFER_SIZE];
     char username[50];
     int vote;
+    char changeVoteChoice;
 
     // Create socket
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -56,6 +57,24 @@ int main() {
         memset(buffer, 0, BUFFER_SIZE);
         recv(sock, buffer, BUFFER_SIZE, 0);
         printf("Server response: %s\n", buffer);
+
+        // Ask if the user wants to change their vote
+        printf("Do you want to change your vote? (y/n): ");
+        scanf(" %c", &changeVoteChoice);
+
+        if (changeVoteChoice == 'y' || changeVoteChoice == 'Y') {
+            printf("Enter your updated vote (1 for Candidate A, 2 for Candidate B): ");
+            scanf("%d", &vote);
+            
+            // Prepare and send the updated vote
+            snprintf(buffer, BUFFER_SIZE, "%s %d", username, vote);
+            send(sock, buffer, strlen(buffer), 0);
+
+            // Receive server response for the updated vote
+            memset(buffer, 0, BUFFER_SIZE);
+            recv(sock, buffer, BUFFER_SIZE, 0);
+            printf("Server response: %s\n", buffer);
+        }
 
         // Optional: Exit after voting
         printf("Do you want to vote again? (y/n): ");
