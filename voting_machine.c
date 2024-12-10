@@ -36,13 +36,15 @@ void addVote(char *username, int vote) {
     // Check if the voter already exists
     for (int i = 0; i < voterCount; i++) {
         if (strcmp(voters[i].username, username) == 0) {
-            printf("Error: User %s has already voted.\n", username);
+            // Update existing vote
+            voters[i].vote = vote;
+            printf("Vote updated successfully for username: %s\n", username);
             pthread_mutex_unlock(&voterLock);
             return;
         }
     }
 
-    // Add a new voter
+    // Add a new voter if the username doesn't exist
     if (voterCount < MAX_VOTERS) {
         strcpy(voters[voterCount].username, username);
         voters[voterCount].vote = vote;
@@ -54,6 +56,7 @@ void addVote(char *username, int vote) {
 
     pthread_mutex_unlock(&voterLock);
 }
+
 
 void displayResults() {
     int candidate1Votes = 0;
